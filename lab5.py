@@ -15,4 +15,5 @@ class sanpham:
     
     def xuatthongtin(self):
         return f"Tên sản phẩm: {self.ten}, Giá: {self.gia}, Giảm giá: {self.giamgia}, Thuế: {self.thue}"
+
     
