@@ -105,15 +105,59 @@ def cap_nhat_nv():
 
 # Y6 tìm nhân viên theo lương
 def tim_nv_theo_luong():
-    print("tìm nhân viên theo mức lương")
+    with open("asm.csv", mode="r", encoding="utf-8") as f:
+        reader = csv.reader(f)
+        data = list(reader)
+
+    if len(data) <= 1:
+        print("Chưa có dữ liệu nhân viên.")
+        return
+    else:
+        luong_can_tim = float(input("Nhập mức lương cần tìm: "))
+        found = False
+        for row in data[1:]:
+            if float(row[2]) == luong_can_tim:
+                print(f"Tìm thấy nhân viên: Mã NV: {row[0]}, Họ và tên: {row[1]}, Lương: {row[2]}")
+                found = True
+        if not found:
+            print("Không tìm thấy nhân viên với mức lương đã nhập.")
+    return
 
 # Y7 sắp xếp nhân viên theo họ và tên
 def sap_xep_nv_theo_ten():
-    print("sắp xếp nhân viên theo họ và tên")
+    with open("asm.csv", mode="r", encoding="utf-8") as f:
+        reader = csv.reader(f)
+        data = list(reader)
+    if len(data) <= 1:
+        print("Chưa có dữ liệu nhân viên.")
+        return
+    else:
+        header = data[0]
+        nv_data = data[1:]
+        nv_data.sort(key=lambda x: x[1])  # sắp xếp theo tên
+        print("Danh sách nhân viên sau khi sắp xếp theo họ và tên:")
+        print(header)
+        for row in nv_data:
+            print(row)
+        return
 
 # Y8 sắp xếp nhân viên theo thu nhập
 def sap_xep_nv_theo_luong():
-    print("sắp xếp nhân viên theo mức lương")
+    with open("asm.csv", mode="r", encoding="utf-8") as f:
+        reader = csv.reader(f)
+        data = list(reader)
+    if len(data) <= 1:
+        print("Chưa có dữ liệu nhân viên.")
+        return
+    else:
+        header = data[0]
+        nv_data = data[1:]
+        nv_data.sort(key=lambda x: float(x[2]), reverse=True)  # sắp xếp theo lương giảm dần
+        print("Danh sách nhân viên sau khi sắp xếp theo lương:")
+        print(header)
+        for row in nv_data:
+            print(row)
+        return
 
 # Y9 xuất 5 nhân viên có thu nhập cao nhất
 def xuat_5_nv_luong_cao_nhat():
