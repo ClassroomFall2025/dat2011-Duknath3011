@@ -161,4 +161,17 @@ def sap_xep_nv_theo_luong():
 
 # Y9 xuất 5 nhân viên có thu nhập cao nhất
 def xuat_5_nv_luong_cao_nhat():
-    print("xuất 5 nhân viên có mức lương cao nhất")
+    with open("asm.csv", mode="r", encoding="utf8") as f:
+        reader = csv.reader(f)
+        data = list(reader)
+    if len(data) <= 1:
+        print("Chưa có dữ liệu nhân viên.")
+        return 
+    ds_nv = data[1:]
+    for row in ds_nv:
+        row[2] = float(row[2])
+    ds_nv.sort(key=lambda x: x[2], reverse=True)
+    print("5 nhân viên có thu nhập cao nhất:")
+    print(data[0])
+    for row in ds_nv[:5]:
+        print(row)
