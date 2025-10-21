@@ -4,7 +4,6 @@ def nhap_nhanvien():
     with open("asm.csv", mode="a", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
 
-        writer.writerow(["Mã NV", "Họ và tên", "Lương"])
         n = int(input("Nhập số nhân viên cần thêm: "))
         for i in range(n):
             print(f"Nhập thông tin nhân viên thứ {i+1}: ")
