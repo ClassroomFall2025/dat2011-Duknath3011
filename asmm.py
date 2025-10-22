@@ -10,8 +10,18 @@ def nhap_nhanvien():
             ma_nv = input("Nhập mã nhân viên: ")
             ten_nv = input("Nhập tên nhân viên: ")
             luong = float(input("Nhập lương: "))
+            cvu_nv = input("Nhập trức vụ nhân viên: ")
+            if cvu_nv == "nhân viên hành chính":
+                pass
+            elif cvu_nv == "nhân viên tiếp thị":
+                doanh_so = float(input("Nhập doanh số bán hàng: "))
+                hoa_hong = doanh_so * 0.05
+                luong + hoa_hong
+            elif cvu_nv == "trưởng phòng":
+                luong_tn = float(input("Nhập lương trách nhiệm: "))
+                luong + luong_tn
             
-            writer.writerow([ma_nv, ten_nv, luong])
+            writer.writerow([ma_nv, ten_nv, cvu_nv, luong, doanh_so if cvu_nv == "nhân viên tiếp thị" else "", luong_tn if cvu_nv == "trưởng phòng" else ""])
 
     print("==> Dữ liệu đã được lưu vào asm.csv ")
 
@@ -40,7 +50,7 @@ def tim_kiem_nv():
         found = False
         for row in data[1:]:
             if row[0] == ma_nv:
-                print(f"Tìm thấy nhân viên: Mã NV: {row[0]}, Họ và tên: {row[1]}, Lương: {row[2]}")
+                print(f"Tìm thấy nhân viên: Mã NV: {row[0]}, Họ và tên: {row[1]}, Chức vụ: {row[2]}, Lương: {row[3]}")
                 found = True
                 break
         if not found:
@@ -85,14 +95,17 @@ def cap_nhat_nv():
         found = False
         for i in range(1, len(data)):
             if data[i][0] == cap_nhat_nv:
-                print(f"Nhân viên hiện tại: Mã NV: {data[i][0]}, Họ và tên: {data[i][1]}, Lương: {data[i][2]}")
+                print(f"Nhân viên hiện tại: Mã NV: {data[i][0]}, Họ và tên: {data[i][1]}, Chức vụ: {data[i][2]}, Lương: {data[i][3]}")
                 ten_moi = input("Nhập họ và tên mới: ")
                 luong_moi = input("Nhập lương mới: ")
+                chuc_vu_moi = input("Nhập chức vụ mới: ")
 
                 if ten_moi:
                     data[i][1] = ten_moi
+                if chuc_vu_moi:
+                    data[i][2] = chuc_vu_moi
                 if luong_moi:
-                    data[i][2] = luong_moi
+                    data[i][3] = luong_moi
 
                 found = True
                 break
@@ -116,7 +129,7 @@ def tim_nv_theo_luong():
         found = False
         for row in data[1:]:
             if float(row[2]) == luong_can_tim:
-                print(f"Tìm thấy nhân viên: Mã NV: {row[0]}, Họ và tên: {row[1]}, Lương: {row[2]}")
+                print(f"Tìm thấy nhân viên: Mã NV: {row[0]}, Họ và tên: {row[1]}, Chức vụ: {row[2]}, Lương: {row[3]}")
                 found = True
         if not found:
             print("Không tìm thấy nhân viên với mức lương đã nhập.")
